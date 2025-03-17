@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\EventoResource;
 use App\Models\Evento;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class EventoController extends Controller
      */
     public function index()
     {
-        //
+        $eventos = Evento::all();
+        return EventoResource::collection($eventos);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\TipoPracticaResource;
 use App\Models\TipoPractica;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class TipoPracticaController extends Controller
      */
     public function index()
     {
-        //
+        $tipoPractica = TipoPractica::all();
+        return TipoPracticaResource::collection($tipoPractica);
     }
 
     /**
