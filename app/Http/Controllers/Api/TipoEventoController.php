@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\TipoEventoResource;
 use App\Models\TipoEvento;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class TipoEventoController extends Controller
      */
     public function index()
     {
-        //
+        $tipoEventos = TipoEvento::all();
+        return TipoEventoResource::collection($tipoEventos);
     }
 
     /**

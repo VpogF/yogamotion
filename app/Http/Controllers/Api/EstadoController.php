@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\EstadoResource;
 use App\Models\Estado;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class EstadoController extends Controller
      */
     public function index()
     {
-        //
+        $estado = Estado::all();
+        return EstadoResource::collection($estado);
     }
 
     /**
