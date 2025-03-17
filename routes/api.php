@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\EventoController;
 use App\Http\Controllers\Api\TipoUsuarioController;
 use App\Http\Controllers\Api\UsuarioController;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('usuario', UsuarioController::class);
 Route::apiResource('tipousuario', TipoUsuarioController::class);
-Route::apiResource('usuario', UsuarioController::class);
+Route::apiResource('evento', EventoController::class);
 Route::apiResource('usuario', UsuarioController::class);
 Route::apiResource('usuario', UsuarioController::class);
 Route::apiResource('usuario', UsuarioController::class);
