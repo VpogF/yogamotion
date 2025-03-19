@@ -11,8 +11,8 @@ class TipoPractica extends Model
 
     protected $table = 'tipo_practica';
     protected $primaryKey = 'id';
-    public $incrementing = 'true';
-    public $timestamps = 'false';
+    public $incrementing = true;
+    public $timestamps = false;
 
 
     /**

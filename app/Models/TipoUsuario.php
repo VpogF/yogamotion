@@ -11,8 +11,8 @@ class TipoUsuario extends Model
 
     protected $table = 'tipo_usuario';
     protected $primaryKey = 'id';
-    public $incrementing = 'true';
-    public $timestamps = 'false';
+    public $incrementing = true;
+    public $timestamps = false;
 
    //parte 1
 
