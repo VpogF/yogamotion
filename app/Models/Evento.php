@@ -11,8 +11,8 @@ class Evento extends Model
 
     protected $table = 'evento';
     protected $primaryKey = 'id';
-    public $incrementing = 'true';
-    public $timestamps = 'false';
+    public $incrementing = true;
+    public $timestamps = false;
 
 
         /**

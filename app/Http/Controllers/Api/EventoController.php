@@ -33,6 +33,7 @@ class EventoController extends Controller
         $evento->descripcion = $request->input('descripcion');
         $evento->duracion = $request->input('duracion');
         $evento->cupo = $request->input('cupo');
+        $evento->precio = $request->input('precio');
         $evento->ubicacion = $request->input('ubicacion');
         $evento->tipo_evento_id = $request->input('tipo_evento_id');
         $evento->tipo_practica_id = $request->input('tipo_practica_id');
