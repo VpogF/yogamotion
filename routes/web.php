@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('/login', [UsuarioController::class, 'showLogin'])->name('login');
+Route::post('/login', [UsuarioController::class, 'login']);
+Route::get('/logout', [UsuarioController::class, 'logout']);
+
+Route::get('/signin', [UsuarioController::class, 'create']);
+Route::post('/signin', [UsuarioController::class, 'store']);
+
+Route::delete('/usuario/{usuario}', [UsuarioController::class, 'destroy'])->name('usuario.destroy');
+
+
+
+
+
+Route::middleware(['auth'])->group(function (){
+    Route::get('/home', function () {
+        $user = Auth::user();
+
+        return view('home', compact('user'));
+    });
+});
+
