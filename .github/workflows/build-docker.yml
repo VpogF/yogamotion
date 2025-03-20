@@ -26,8 +26,8 @@ jobs:
 
       - name: Construir la imagen de Docker
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/yourimage:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/yogamotion:latest .
 
       - name: Subir la imagen a Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/yourimage:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/yogamotion:latest
