@@ -17,4 +17,4 @@ jobs:
         server: ftpupload.net
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
-        server-dir: /yogamotion.vpf2024.me/htdocs
+        server-dir: /yogamotion.vpf2024.me/htdocs/
