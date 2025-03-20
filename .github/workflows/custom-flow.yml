@@ -1,0 +1,29 @@
+name: Send Email on Pull to Main
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed  # Se ejecutará cuando el PR se cierre (mergeado o rechazado)
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if PR was merged
+        if: github.event.pull_request.merged == true
+        run: echo "Pull request merged to main!"
+
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "Pull Request Mergeado a Main 🚀"
+          body: "Se ha realizado un merge al branch main en el repositorio: ${{ github.repository }}"
+          to: ${{ secrets.EMAIL_DESTINATION }}"
+          from: "GitHub Actions Bot <${{ secrets.EMAIL_USER }}>"
