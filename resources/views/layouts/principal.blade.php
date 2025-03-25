@@ -12,7 +12,33 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    @php
+    $authUser = Auth::check() ? [
+        'isAuthenticated' => true,
+        'userEmail' => Auth::user()->correo,
+        'userId' => Auth::user()->id
+    ] : [
+        'isAuthenticated' => false,
+        'userEmail' => null,
+        'userId' => null
+    ];
+    @endphp
+
+    <script>
+    window.authUser = @json($authUser);
+    </script>
+
+    <!-- Vue se montará aquí -->
+    <div id="app">
+        <Navbar
+            :isAuthenticated="authUser.isAuthenticated"
+            :userEmail="authUser.userEmail"
+            :userId="authUser.userId"
+        />
+        <pepe></pepe>
+    </div>
+
+    {{-- <nav class="navbar navbar-expand-lg bg-dark-purple">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -83,11 +109,8 @@
                 </div>
             </div>
         </div>
-    </nav>
-    {{-- <div id="app">
+    </nav> --}}
 
-        <ejemplo></ejemplo>
-    </div> --}}
     <div class="container-fluid">
         @yield('contenido')
     </div>
