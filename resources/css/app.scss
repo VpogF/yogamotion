@@ -1,3 +1,18 @@
-$primary: #7FD297;
+$dark-purple: #48435C !default;
+$light-purple: #9792E3 !default;
+$custom-white: #EDFFEC !default;
+$custom-grey: #5A5766 !default;
+$custom-green: #7FD297 !default;
+
+
+$theme-colors: (
+  "custom-green": $custom-green,
+  "custom-grey":  $custom-grey,
+  "custom-white": $custom-white,
+  "light-purple": $light-purple,
+  "dark-purple":  $dark-purple,
+) !default;
+
+
 
 @import 'bootstrap/scss/bootstrap';
