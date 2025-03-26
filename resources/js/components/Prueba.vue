@@ -13,7 +13,7 @@ export default {
     background-color: #7FD297;
     color: #EDFFEC;
     font-weight: bold;
-    width: 100%;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     }
 </style>
