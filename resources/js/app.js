@@ -5,7 +5,7 @@ import * as bootstrap from 'bootstrap';
 import { createApp } from 'vue'
 
 import prueba from './components/Prueba.vue';
-import Navbar from './components/Navbar.vue';
+import CardIndex from './components/Card-index.vue';
 
 const app = createApp({
     data() {
@@ -15,8 +15,8 @@ const app = createApp({
     }
 });
 
-app.component('pepe', prueba);
-app.component('Navbar', Navbar);
+app.component('prueba', prueba);
+app.component('CardIndex', CardIndex);
 
 app.mount('#app');
 

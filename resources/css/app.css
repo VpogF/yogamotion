@@ -1,0 +1,15 @@
+body {
+    height: 100%; /* Asegurarse de que todo el documento ocupe el 100% de la altura */
+    margin: 0;
+    background: linear-gradient(45deg, #7FD297 50%, #9792E3 50%);
+    overflow: hidden; /* Evitar scroll en el body */
+}
+
+#app {
+    display: flex; /* Activar flexbox */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    height: 100vh; /* Ocupar el 100% de la altura de la pantalla */
+    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+    box-sizing: border-box; /* Asegura que padding y border no afecten el tamaño */
+  }
