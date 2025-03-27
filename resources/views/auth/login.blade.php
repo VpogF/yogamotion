@@ -1,49 +1,38 @@
 @extends('layouts.principal')
 
 @section('contenido')
-<div class="offset-lg-3 col-lg-6 mt-5">
-    {{-- @include('partials.mensajes') --}}
-    <div class="card">
-        <div class="card-header bg-secondary text-light">
-                Login
-        </div>
-        <div class="card-body">
-            <form action="{{ action([App\Http\Controllers\UsuarioController::class, 'login']) }}" method="POST">
-                @csrf
-                <div class="row mb-3">
-                    <label for="correo" class="col-sm-2 col-form-label">Correo</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="correo" name="correo" autofocus
-                        value="{{ old('correo') }}">
+    <div class="d-flex align-items-center justify-content-center vh-100 vw-100">
+        {{-- @include('partials.mensajes') --}}
+        <div class="card align-items-center justify-content-center" style="width: 30%; padding: 25px;">
+            <div class="fw-bold" style="font-size: 45px;">
+                Inicio Sesión
+            </div>
+            <div class="card-body" style="width: 100%">
+                <form action="{{ action([App\Http\Controllers\UsuarioController::class, 'login']) }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="correo" class="col-form-label">Correo</label>
+                        <div>
+                            <input type="text" class="form-control" id="correo" name="correo" autofocus
+                                value="{{ old('correo') }}">
+                        </div>
                     </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" name="password"
-                        value="{{ old('password') }}">
+                    <div class="mb-3">
+                        <label for="password" class="col-form-label">Contraseña</label>
+                        <div>
+                            <input type="password" class="form-control" id="password" name="password"
+                                value="{{ old('password') }}">
+                        </div>
                     </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-sm-12 d-flex flex-row-reverse">
-                        <a href="{{ url('/') }}" class="btn btn-secondary float-right ms-1"><i class="fa fa-times"
-                            aria-hidden="true"></i>
-                            Cancelar
-                        </a>
-                        <button type="submit" class="btn btn-primary float-right"><i class="fa fs-check"
-                            aria-hidden="true"></i>
-                            Aceptar
+                    <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                        <button type="submit" class="standar-botton float-right mt-5 mb-5"><i class="fa fs-check"
+                                aria-hidden="true"></i>
+                            Acceder
                         </button>
+                        <p>¿Eres nuevo aquí?<a href="{{ url('/signin') }}">Crea una cuenta</a></p>
                     </div>
-                </div>
-
-            </form>
-
+                </form>
+            </div>
         </div>
     </div>
-
-</div>
-
 @endsection

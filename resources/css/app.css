@@ -12,4 +12,18 @@ body {
     height: 100vh; /* Ocupar el 100% de la altura de la pantalla */
     width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
     box-sizing: border-box; /* Asegura que padding y border no afecten el tamaño */
-  }
+}
+
+.standar-botton {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #48435C;
+    color: #EDFFEC;
+    font-size: 18px;
+}
+
+a {
+    color: #48435C !important;
+}

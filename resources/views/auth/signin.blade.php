@@ -21,7 +21,7 @@
                 <div class="row mb-3">
                     <label for="correo" class="col-sm-2 col-form-label">Correo</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="correo" name="correo" autofocus
+                        <input type="email" class="form-control" id="correo" name="correo" autofocus
                         value="{{ old('correo') }}">
                     </div>
                 </div>

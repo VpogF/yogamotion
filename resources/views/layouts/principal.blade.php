@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">yogamotion</a>
+            <a class="navbar-brand fw-semibold" style="font-size: 45px;" href="{{ url('/') }}">yogamotion</a>
             <div class="d-flex" role="search">
                 <ul class="navbar-nav" me-auto mb-2 mb.lg-0>
                     @if (Auth::check())
@@ -47,7 +47,7 @@
                             </div>
                         </li>
                     @else
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ url('/signin') }}"><i class="fa fa-sign-in"
                                     aria-hidden="true"></i>
                                 Signin</a>
@@ -56,7 +56,7 @@
                             <a class="nav-link" href="{{ url('/login') }}"><i class="fa fa-sign-in"
                                     aria-hidden="true"></i>
                                 Login</a>
-                        </li>
+                        </li> --}}
                 </ul>
                 @endif
             </div>
