@@ -37,9 +37,9 @@
         </div>
 
         <!-- Botón dinámico -->
-        <button class="dynamic-button">
+        <a class="nav-link" :href="'/yogamotion/public/login'"><button class="dynamic-button">
             {{ selectedOption === "opcion1" ? "Acceder como Organizador" : "Acceder como Alumno" }}
-        </button>
+        </button></a>
     </div>
 </template>
 
