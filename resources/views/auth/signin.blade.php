@@ -34,7 +34,29 @@
                     </div>
                 </div>
 
-                <div>
+
+
+                <div class="btn-group my-4 d-flex justify-content-center" role="group">
+                    <input type="radio" class="btn-check" name="btnradio" id="2" value="2"
+                        {{ old('btnradio', '2') == '2' ? 'checked' : '' }}>
+                    <label class="btn btn-outline-primary" for="2">Soy Organizador</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="3" value="3"
+                        {{ old('btnradio') == '3' ? 'checked' : '' }}>
+                    <label class="btn btn-outline-primary" for="3">Soy Alumno</label>
+                </div>
+
+                {{-- Input de Ubicación (se oculta por defecto y se muestra con JS) --}}
+                <div id="ubicacionDiv">
+                    <label for="ubicacion" class="col-form-label">Ubicación</label>
+                    <div>
+                        <input type="text" class="form-control" id="ubicacion" name="ubicacion"
+                            value="{{ old('ubicacion') }}">
+                    </div>
+                </div>
+
+
+                {{-- <div>
                     <label for="ubicacion" class="col-form-label">Ubicacion</label>
                     <div>
                         <input type="text" class="form-control" id="ubicacion" name="ubicacion"
@@ -47,7 +69,7 @@
 
                     <input type="radio" class="btn-check" name="btnradio" id="3" value="3" autocomplete="off">
                     <label class="btn btn-outline-primary" for="3">Soy Alumno</label>
-                </div>
+                </div> --}}
 
                 <div class="row mb-3">
                     <div class="col-sm-12 d-flex justify-content-center">
@@ -68,5 +90,24 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const radios = document.querySelectorAll('input[name="btnradio"]');
+        const ubicacionDiv = document.getElementById('ubicacionDiv');
+
+        function toggleUbicacion() {
+            const selectedValue = document.querySelector('input[name="btnradio"]:checked').value;
+            ubicacionDiv.style.display = selectedValue === '3' ? 'block' : 'none';
+        }
+
+        radios.forEach(radio => {
+            radio.addEventListener("change", toggleUbicacion);
+        });
+
+        // Ejecutar al cargar la página (para mantener selección después de enviar el formulario)
+        toggleUbicacion();
+    });
+</script>
 
 @endsection

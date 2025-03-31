@@ -1,5 +1,13 @@
 @extends('layouts.principal')
 
 @section('contenido')
-    <card-evento></card-evento>
+    @if (Auth::user()->tipo_usuario_id == 3)
+        <div class="home-container">
+            <h3>Busca, reserva y disfruta de las mejores clases en un solo lugar.</h3>
+            <card-evento></card-evento>
+        </div>
+
+    @elseif (Auth::user()->tipo_usuario_id == 2)
+        <div>Componente organizador</div>
+    @endif
 @endsection

@@ -16,7 +16,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::all();
+        $eventos = Evento::with('tipoPractica')->get();
         return EventoResource::collection($eventos);
     }
 
