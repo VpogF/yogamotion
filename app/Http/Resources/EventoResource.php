@@ -14,6 +14,20 @@ class EventoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'nom_evento' => $this->nom_evento,
+            'descripcion' => $this->descripcion,
+            'ubicacion' => $this->ubicacion,
+            'duracion' => $this->duracion,
+            'cupo' => $this->cupo,
+            'precio' => $this->precio,
+            // Relación tipoPractica
+            'tipo_practica' => [
+                'id' => $this->tipoPractica->id,
+                'nom_practica' => $this->tipoPractica->nom_practica,
+            ],
+        ];
+        // return parent::toArray($request);
     }
 }

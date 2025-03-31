@@ -2,14 +2,26 @@
     margin: 0;       /* Elimina los márgenes predeterminados */
     padding: 0;      /* Elimina los paddings predeterminados */
     box-sizing: border-box; /* Hace que el tamaño total incluya padding y border */
+
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita el scroll horizontal */
+    overflow-y: auto; /* Permite scroll pero oculta la barra */
+    scrollbar-width: none; /* Oculta la barra en Firefox */
+    -ms-overflow-style: none; /* Oculta la barra en Internet Explorer y Edge */
+}
 
 body {
-    height: 100%; /* Asegurarse de que todo el documento ocupe el 100% de la altura */
-    margin: 0;
     background: linear-gradient(45deg, #7FD297 50%, #9792E3 50%);
-    /*overflow: hidden; /* Evitar scroll en el body */
+    position: relative; /* Permite que el z-index funcione correctamente */
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Oculta la barra en Chrome, Safari y Edge */
 }
 
 #app {
@@ -20,8 +32,6 @@ body {
     width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
     box-sizing: border-box; /* Asegura que padding y border no afecten el tamaño */
 }
-
-
 
 .standar-botton {
     padding: 12px 24px;
@@ -39,5 +49,11 @@ a {
 
 .title-container {
     margin: 50px;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 

@@ -23,8 +23,8 @@
                         @endphp
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                {{ Auth::user()->correo }}
+                                aria-expanded="false"> Hola,
+                                {{ Auth::user()->nom_user }} !
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url('/logout') }}"><i class="bi bi-box-arrow-right"
