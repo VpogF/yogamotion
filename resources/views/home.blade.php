@@ -8,6 +8,8 @@
         </div>
 
     @elseif (Auth::user()->tipo_usuario_id == 2)
-        <div>Componente organizador</div>
+    <div class="home-container">
+        <panel-org :usuario-id={{ Auth::user()->id }}></panel-org>
+    </div>
     @endif
 @endsection
