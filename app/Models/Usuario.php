@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Evento;
 use App\Models\TipoUsuario;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +39,9 @@ class Usuario extends Authenticatable
      */
     public function eventos()
     {
-        return $this->belongsToMany(Evento::class, 'usuario_has_evento', 'usuario_id', 'evento_id')->withPivot('fecha');
+        return $this->belongsToMany(Evento::class,
+        'usuario_has_evento',
+        'usuario_id',
+        'evento_id')->withPivot('fecha');
     }
 }

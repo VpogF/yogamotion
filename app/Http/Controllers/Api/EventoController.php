@@ -27,34 +27,67 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        $evento = new Evento();
+         // Crear nuevo evento
+    $evento = new Evento();
+    $evento->nom_evento = $request->input('nom_evento');
+    $evento->descripcion = $request->input('descripcion');
+    $evento->duracion = $request->input('duracion');
+    $evento->cupo = $request->input('cupo');
+    $evento->precio = $request->input('precio');
+    $evento->ubicacion = $request->input('ubicacion');
+    $evento->tipo_evento_id = $request->input('tipo_evento_id');
+    $evento->tipo_practica_id = $request->input('tipo_practica_id');
+    $evento->estado_id = $request->input('estado_id');
 
-        $evento->nom_evento = $request->input('nom_evento');
-        $evento->descripcion = $request->input('descripcion');
-        $evento->duracion = $request->input('duracion');
-        $evento->cupo = $request->input('cupo');
-        $evento->precio = $request->input('precio');
-        $evento->ubicacion = $request->input('ubicacion');
-        $evento->tipo_evento_id = $request->input('tipo_evento_id');
-        $evento->tipo_practica_id = $request->input('tipo_practica_id');
-        $evento->estado_id = $request->input('estado_id');
+    try {
+        // Guardar el evento
+        $evento->save();
 
-
-        try
-        {
-            $evento->save();
-            $response = (new EventoResource($evento))
-                        ->response()
-                        ->setStatusCode(201);
-
-        } catch (QueryException $ex)
-        {
-            $mensaje = 'Error al insertar el evento';
-            $response = \response()
-                        ->json(['error' => $mensaje], 400);
+        // Asociar usuario al evento (usando attach)
+        if ($request->has('usuario_id')) {
+            $evento->usuarios()->attach($request->input('usuario_id'), ['fecha' => now()]);
         }
 
-        return $response;
+        // Retornar el evento como recurso
+        $response = (new EventoResource($evento))
+                    ->response()
+                    ->setStatusCode(201);
+
+    } catch (QueryException $ex) {
+        $mensaje = 'Error al insertar el evento';
+        $response = response()->json(['error' => $mensaje], 400);
+    }
+
+    return $response;
+
+        // $evento = new Evento();
+
+        // $evento->nom_evento = $request->input('nom_evento');
+        // $evento->descripcion = $request->input('descripcion');
+        // $evento->duracion = $request->input('duracion');
+        // $evento->cupo = $request->input('cupo');
+        // $evento->precio = $request->input('precio');
+        // $evento->ubicacion = $request->input('ubicacion');
+        // $evento->tipo_evento_id = $request->input('tipo_evento_id');
+        // $evento->tipo_practica_id = $request->input('tipo_practica_id');
+        // $evento->estado_id = $request->input('estado_id');
+
+
+        // try
+        // {
+        //     $evento->save();
+        //     $response = (new EventoResource($evento))
+        //                 ->response()
+        //                 ->setStatusCode(201);
+
+        // } catch (QueryException $ex)
+        // {
+        //     $mensaje = 'Error al insertar el evento';
+        //     $response = \response()
+        //                 ->json(['error' => $mensaje], 400);
+        // }
+
+        // return $response;
 
     }
 

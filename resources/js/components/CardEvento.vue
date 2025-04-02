@@ -88,7 +88,7 @@ export default {
     margin: 20px;
     width: 80%;
     height: fit-content;
-    background-color: grey;
+    background-color:#EDFFEC;
     padding: 20px;
     border-radius: 10px;
 }

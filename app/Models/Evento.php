@@ -15,14 +15,20 @@ class Evento extends Model
     public $timestamps = false;
 
 
-        /**
+
+    /**
      * The roles that belong to the Usuario
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function usuarios()
     {
-        return $this->belongsToMany(Usuario::class, 'usuario_has_evento', 'evento_id', 'usuario_id')->withPivot('fecha');
+        return $this->belongsToMany(
+            Usuario::class,
+            'usuario_has_evento',
+            'evento_id',
+            'usuario_id'
+        )->withPivot('fecha');
     }
 
 
