@@ -105,8 +105,8 @@
 </template>
 
 <script setup>
-import axios from "axios";
-import { ref } from "vue";
+
+import { ref, defineProps, defineEmits, watchEffect } from "vue";
 
 // Definir las propiedades que el componente recibe desde el padre
 const props = defineProps({
@@ -115,6 +115,8 @@ const props = defineProps({
     required: true,
   }
 });
+
+const emit = defineEmits(["evento-creado"]);
 
 // Definir el formulario reactivo
 const form = ref({
@@ -127,7 +129,12 @@ const form = ref({
   estado_id: null,
   tipo_evento_id: null,
   precio: null,
-  usuario_id: props.usuarioId // Asignar directamente el usuario_id pasado como propiedad
+  usuario_id: null, // Inicializa en null
+//   usuario_id: props.usuarioId // Asignar directamente el usuario_id pasado como propiedad
+});
+
+watchEffect(() => {
+  form.value.usuario_id = props.usuarioId;
 });
 
 // Datos para los selectores

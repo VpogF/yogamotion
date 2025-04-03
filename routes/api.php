@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('usuario', UsuarioController::class);
 Route::apiResource('tipousuario', TipoUsuarioController::class);
 Route::apiResource('evento', EventoController::class);
+Route::get('/evento/{usuarioId}', [EventoController::class, 'obtenerEventosPorUsuario']);
 Route::apiResource('tipoevento', TipoEventoController::class);
 Route::apiResource('estado', EstadoController::class);
 Route::apiResource('tipopractica', TipoPracticaController::class);
