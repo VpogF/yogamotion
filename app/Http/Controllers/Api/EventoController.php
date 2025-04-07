@@ -8,6 +8,7 @@ use PhpParser\Node\Stmt\TryCatch;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventoResource;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\Builder;
 
 class EventoController extends Controller
 {
@@ -20,7 +21,19 @@ class EventoController extends Controller
         $eventos = Evento::with('tipoPractica')->get();
         return EventoResource::collection($eventos);
     }
+    public function obtenerEventoUsuario($usuario_id)
+    {
+        $eventos = Evento::whereHas('usuarios', function (Builder $query)use ($usuario_id) {
+            $query->where('usuario_id', '=', $usuario_id);
+        })->get();
 
+        return EventoResource::collection($eventos);
+    }
+
+    public function get()
+    {
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -47,7 +60,7 @@ class EventoController extends Controller
 
             // Asociar usuario al evento (usando attach)
             if ($request->has('usuario_id')) {
-                $evento->usuarios()->attach($request->input('usuario_id'), ['fecha' => now()]);
+                $evento->usuarios()->attach($request->input('usuario_id'), attributes: ['fecha' => now()]);
             }
 
             // Retornar el evento como recurso
@@ -117,13 +130,13 @@ class EventoController extends Controller
         //
     }
 
-    public function obtenerEventosPorUsuario($usuarioId)
-    {
+    // public function obtenerEventosPorUsuario($usuarioId)
+    // {
 
-        // Obtener eventos donde el usuario_id coincide con el ID proporcionado
-        $eventos = Evento::where('usuario_id', $usuarioId)->with('tipoPractica')->get();
+    //     // Obtener eventos donde el usuario_id coincide con el ID proporcionado
+    //     $eventos = Evento::where('usuario_id', $usuarioId)->with('tipoPractica')->get();
 
-        // Devolver los eventos en un formato adecuado con el recurso
-        return EventoResource::collection($eventos);
-    }
+    //     // Devolver los eventos en un formato adecuado con el recurso
+    //     return EventoResource::collection($eventos);
+    // }
 }
