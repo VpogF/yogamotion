@@ -161,6 +161,7 @@ const tiposEvento = [
 
 // Función para enviar el formulario
 const submitForm = async () => {
+    console.log(form.value)
   try {
     const response = await fetch('http://localhost:8080/yogamotion/public/api/evento', {
       method: 'POST',
@@ -176,6 +177,7 @@ const submitForm = async () => {
 
     const result = await response.json();
     console.log('Evento creado:', result);
+    emit('evento-creado', response.data);
   } catch (error) {
     console.error('Error:', error);
     alert('Hubo un error al guardar el evento');

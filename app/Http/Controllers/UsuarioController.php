@@ -79,7 +79,7 @@ class UsuarioController extends Controller
         $usuario->tipo_usuario_id = $request->input('btnradio');
 
         $usuario->save();
-
+        Auth::login($usuario);
         $response = redirect('/login');
 
         return $response;
