@@ -29,8 +29,13 @@ defineProps({
     background-color: #f8f9fa;
     padding: 15px;
     border-radius: 5px;
+    border: 2px solid black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
     margin-bottom: 15px;
+}
+img {
+    max-width: 270px;
+    height: 180px;
 }
 </style>

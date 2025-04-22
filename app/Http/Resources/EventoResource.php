@@ -42,12 +42,14 @@ class EventoResource extends JsonResource
             ] : null,
 
             // Relación con Usuario Organizador
-            'usuarios' => $this->usuarios->map(function ($usuario) {
-                return [
-                    'id' => $usuario->id,
-                    'nombre' => $usuario->nombre,
-                    'email' => $usuario->email
-                ];
+            'usuarios' => $this->whenLoaded('usuarios', function () {
+                return $this->usuarios->map(function ($usuario) {
+                    return [
+                        'id' => $usuario->id,
+                        'nombre' => $usuario->nombre,
+                        'email' => $usuario->email
+                    ];
+                });
             }),
         ];
 

@@ -31,6 +31,10 @@ Route::post('/signin', [UsuarioController::class, 'store']);
 
 Route::delete('/usuario/{usuario}', [UsuarioController::class, 'destroy'])->name('usuario.destroy');
 
+Route::get('/crear-evento', function () {
+    return view('formCreaEvento');
+});
+
 Route::middleware(['auth'])->group(function (){
     Route::get('/home', function () {
         $user = Auth::user();

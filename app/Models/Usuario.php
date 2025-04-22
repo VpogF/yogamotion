@@ -39,9 +39,11 @@ class Usuario extends Authenticatable
      */
     public function eventos()
     {
-        return $this->belongsToMany(Evento::class,
+        return $this->belongsToMany(
+        Evento::class,
         'usuario_has_evento',
         'usuario_id',
-        'evento_id')->withPivot('fecha');
+        'evento_id'
+        )->withPivot('fecha');
     }
 }
