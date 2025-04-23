@@ -24,6 +24,7 @@
                 <img src="/public/img/claseyogaimg.webp" />
                 <h3>{{ evento.nom_evento }}</h3>
                 <p>{{ evento.descripcion }}</p>
+                <p><strong>Fecha del Evento:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
                 <p><strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
                 <p><strong>Duración:</strong> {{ evento.duracion }} horas</p>
                 <p><strong>Cupo:</strong> {{ evento.cupo }}</p>

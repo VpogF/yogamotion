@@ -10,6 +10,7 @@ import CardEvento from './components/CardEvento.vue';
 import CreaEvento from './components/Crea-evento.vue';
 import PanelOrg from './components/Panel-org.vue';
 import Card from './components/Card.vue';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const app = createApp({
     data() {

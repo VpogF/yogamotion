@@ -3,6 +3,9 @@
         <label for="nom_evento">Nombre del Evento:</label>
         <input v-model="form.nom_evento" type="text" id="nom_evento" class="input" required />
 
+        <label for="fecha_evento">Fecha del Evento:</label>
+        <input v-model="form.fecha_evento" type="date" id="fecha_evento" class="input" required />
+
         <label for="descripcion">Descripción:</label>
         <textarea v-model="form.descripcion" id="descripcion" class="input" rows="4" required></textarea>
 
@@ -39,6 +42,7 @@
         <label for="precio">Precio:</label>
         <input v-model.number="form.precio" type="number" id="precio" step="0.01" class="input" required />
 
+        <input type="hidden" v-model="form.usuario_id" />
         <button type="submit" class="standar-botton">Guardar Evento</button>
     </form>
 </template>
@@ -66,6 +70,7 @@ const form = ref({
     estado_id: null,
     tipo_evento_id: null,
     precio: null,
+    fecha_evento: '',
     usuario_id: props.usuarioId,
 });
 
