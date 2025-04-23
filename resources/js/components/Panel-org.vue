@@ -1,12 +1,23 @@
 <template lang="">
     <div class="contenedor-card-eventos">
         <h2>Tus eventos</h2>
-        <!-- Mostrar eventos si existen, sino mostrar mensaje -->
-        <div v-if="eventos.length > 0" class="eventos-container">
-            <card v-for="evento in eventos" :key="evento.id" :evento="evento" />
+        <div v-if="loading" class="text-center mt-4 mb-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
         </div>
-        <p v-else>Todavía no has creado ningún evento</p>
-
+        <!-- Mostrar eventos si existen, sino mostrar mensaje -->
+        <div v-else>
+            <div v-if="eventos.length > 0" class="eventos-container">
+                <card
+                    v-for="evento in eventos"
+                    :key="evento.id"
+                    :evento="evento"
+                    @eliminar="eliminarEvento"
+                />
+            </div>
+            <p v-else>Todavía no has creado ningún evento</p>
+        </div>
         <a
             :href="'/yogamotion/public/crear-evento?usuarioId=' + usuarioId"
             class="standar-botton"
@@ -33,6 +44,7 @@ export default {
             // Estado que controla si se muestra o no el componente crea-evento
             showEvento: false,
             eventos: [], // Guardar todos los eventos creados
+            loading: true, // <--- nuevo estado
         };
     },
     methods: {
@@ -57,6 +69,7 @@ export default {
         // Obtener los eventos desde la API al cargar la página
         async obtenerEventos() {
             const me = this;
+            me.loading = true;
             try {
                 const response = await axios.get(
                     `http://localhost:8080/yogamotion/public/api/usuario/${me.usuarioId}/eventos`
@@ -65,6 +78,24 @@ export default {
                 console.log("Eventos cargados:", me.eventos);
             } catch (error) {
                 console.error("Error al obtener eventos:", error);
+            } finally {
+                this.loading = false; // <-- lo desactivamos cuando termina
+            }
+        },
+        async eliminarEvento(id) {
+            const me = this;
+            if (!confirm("¿Estás seguro de que quieres eliminar este evento?"))
+                return;
+
+            try {
+                await axios.delete(
+                    `http://localhost:8080/yogamotion/public/api/evento/${id}`
+                );
+                me.eventos = me.eventos.filter((evento) => evento.id !== id);
+                console.log("Evento eliminado correctamente");
+            } catch (error) {
+                console.error("Error al eliminar el evento:", error);
+                alert("Hubo un problema al eliminar el evento.");
             }
         },
     },
@@ -74,10 +105,10 @@ export default {
 };
 </script>
 <style scoped>
-h2{
-    color: #5A5766;
+h2 {
+    color: #5a5766;
 }
-.contenedor-card-eventos{
+.contenedor-card-eventos {
     justify-items: center;
     margin-bottom: 50px;
     gap: 10px;
@@ -86,13 +117,13 @@ h2{
 .eventos-container {
     margin: 20px;
     height: fit-content;
-    background-color: #edffec;
+    /* background-color: #edffec; */
     padding: 20px;
+    padding-bottom: 50px;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 35px
+    gap: 35px;
 }
-
 </style>

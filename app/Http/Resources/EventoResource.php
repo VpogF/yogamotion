@@ -22,6 +22,7 @@ class EventoResource extends JsonResource
             'duracion' => $this->duracion,
             'cupo' => $this->cupo,
             'precio' => $this->precio,
+            'fecha_evento' => $this->fecha_evento,
 
             // Relación con Tipo de Práctica
             'tipo_practica' => $this->tipoPractica ? [
@@ -32,7 +33,7 @@ class EventoResource extends JsonResource
             // Relación con Estado del Evento
             'estado' => $this->estado ? [
                 'id' => $this->estado->id,
-                'nombre' => $this->estado->nombre
+                'nombre' => $this->estado->estado
             ] : null,
 
             // Relación con Tipo de Evento
@@ -52,28 +53,5 @@ class EventoResource extends JsonResource
                 });
             }),
         ];
-
-
-
-        // return [
-        //     'id' => $this->id,
-        //     'nom_evento' => $this->nom_evento,
-        //     'descripcion' => $this->descripcion,
-        //     'ubicacion' => $this->ubicacion,
-        //     'duracion' => $this->duracion,
-        //     'cupo' => $this->cupo,
-        //     'precio' => $this->precio,
-        //     // Relación tipoPractica
-        //     'tipo_practica' => [
-        //         'id' => $this->tipoPractica->id,
-        //         'nom_practica' => $this->tipoPractica->nom_practica,
-        //     ],
-        //     'usuario_organizador' => $this->usuarios()->first() ? [
-        //         'id' => $this->usuarios()->first()->id,
-        //         'nombre' => $this->usuarios()->first()->nombre,
-        //         'email' => $this->usuarios()->first()->email,
-        //     ] : null,
-        // ];
-        // return parent::toArray($request);
     }
 }
