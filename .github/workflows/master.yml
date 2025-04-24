@@ -31,7 +31,7 @@ jobs:
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
           server-dir: /yogamotion.vpf2024.me/htdocs/
-          local-dir: dist
+          local-dir: dist/
           exclude: |
             **/.git*
             **/.github*
