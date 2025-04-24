@@ -1,41 +1,20 @@
-name: 🚀 Deploy Vue App on push
-
 on:
-  push:
-    branches:
-      - main
-
+    push:
+        branches:
+         - main
+name: 🚀 Deploy website on push
 jobs:
-  build-and-deploy:
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
-
     steps:
-      - name: 🚚 Checkout code
-        uses: actions/checkout@v4
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
 
-      - name: 🔧 Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: 📦 Install dependencies
-        run: npm install
-
-      - name: 🛠 Build project
-        run: npm run build
-
-      - name: 📂 Deploy to FTP server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ftpupload.net
-          username: ${{ secrets.ftp_username }}
-          password: ${{ secrets.ftp_password }}
-          server-dir: /yogamotion.vpf2024.me/htdocs/
-          local-dir: dist/
-          exclude: |
-            **/.git*
-            **/.github*
-            **/node_modules*
-            **/tests*
-            **/src*
-            .env
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftpupload.net
+        username: ${{ secrets.ftp_username }}
+        password: ${{ secrets.ftp_password }}
+        server-dir: /yogamotion.vpf2024.me/htdocs/
