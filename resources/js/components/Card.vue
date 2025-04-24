@@ -192,5 +192,6 @@ img {
     width: 100%;
     color: #fff;
     align-items: center;
+    border-radius: 6px;
 }
 </style>

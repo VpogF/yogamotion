@@ -22,7 +22,7 @@
     "src": "resources/css/app.scss"
   },
   "resources/js/app.css": {
-    "file": "assets/app-64de2c44.css",
+    "file": "assets/app-7e7a0ea5.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -32,9 +32,9 @@
       "assets/bootstrap-icons-bb1de989.woff"
     ],
     "css": [
-      "assets/app-64de2c44.css"
+      "assets/app-7e7a0ea5.css"
     ],
-    "file": "assets/app-6413a485.js",
+    "file": "assets/app-b64f93a8.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
