@@ -83,7 +83,7 @@ img {
 
         <!-- Contenido del evento -->
         <div class="event-info">
-            <h4>{{ evento.estado?.nombre || 'Estado desconocido' }}</h4>
+            <h4 class="activo">{{ evento.estado?.nombre || 'Estado desconocido' }}</h4>
             <h3>{{ evento.nom_evento }}</h3>
             <p>{{ evento.descripcion }}</p>
             <p><strong>Fecha del Evento:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
@@ -185,5 +185,12 @@ img {
 
 .event-info strong {
     color: #48435C;
+}
+
+.activo{
+    background-color: green;
+    width: 100%;
+    color: #fff;
+    align-items: center;
 }
 </style>
