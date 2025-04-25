@@ -32,3 +32,4 @@ Route::get('/usuario/{usuario_id}/eventos', [EventoController::class, 'obtenerEv
 Route::apiResource('tipoevento', TipoEventoController::class);
 Route::apiResource('estado', EstadoController::class);
 Route::apiResource('tipopractica', TipoPracticaController::class);
+Route::post('/evento/{evento}/apuntarse', [EventoController::class, 'apuntarse']);

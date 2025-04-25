@@ -83,7 +83,7 @@ img {
 
         <!-- Contenido del evento -->
         <div class="event-info">
-            <h4 class="activo">{{ capitalizar(evento.estado.estado) || 'Estado desconocido' }}</h4>
+            <h4 :class="claseEstado(evento.estado.estado)">{{ capitalizar(evento.estado.estado) || 'Estado desconocido' }}</h4>
             <h3>{{ evento.nom_evento }}</h3>
             <p>{{ evento.descripcion }}</p>
             <p><strong>Fecha del Evento:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
@@ -106,6 +106,14 @@ defineProps({
 function capitalizar(texto) {
   if (!texto) return '';
   return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+}
+function claseEstado(estado) {
+  if (!estado) return '';
+  const estadoLower = estado.toLowerCase();
+  if (estadoLower === 'activo') return 'activo';
+  if (estadoLower === 'cancelado') return 'cancelado';
+  if (estadoLower === 'modificado') return 'modificado';
+  return '';
 }
 </script>
 
@@ -193,6 +201,24 @@ img {
 
 .activo{
     background-color: green;
+    width: 100%;
+    color: #fff;
+    align-items: center;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.cancelado{
+    background-color: red;
+    width: 100%;
+    color: #fff;
+    align-items: center;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.modificado{
+    background-color: yellow;
     width: 100%;
     color: #fff;
     align-items: center;

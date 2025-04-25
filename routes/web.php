@@ -35,6 +35,11 @@ Route::get('/crear-evento', function () {
     return view('formCreaEvento');
 });
 
+Route::get('/detalle-evento', function () {
+    return view('detalleEvento');
+});
+
+
 Route::middleware(['auth'])->group(function (){
     Route::get('/home', function () {
         $user = Auth::user();
