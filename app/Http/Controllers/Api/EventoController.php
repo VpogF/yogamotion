@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\UsuarioResource;
 use App\Models\Evento;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\EventoResource;
+use App\Http\Resources\UsuarioResource;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -26,7 +27,7 @@ class EventoController extends Controller
     public function obtenerEventoUsuario($usuario_id)
     {
 
-        $usuario = Usuario::with(['org_eventos.estado', 'org_eventos.tipoPractica', 'org_eventos.tipoEvento' ])->where('id', $usuario_id)->first();
+        $usuario = Usuario::with(['org_eventos.estado', 'org_eventos.tipoPractica', 'org_eventos.tipoEvento'])->where('id', $usuario_id)->first();
         return new UsuarioResource($usuario);
     }
     public function get()
@@ -75,9 +76,15 @@ class EventoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Evento $evento)
+    public function show($id)
     {
-        //
+        $evento = Evento::find($id);  // Buscar el evento por su ID
+
+        if (!$evento) {
+            return response()->json(['message' => 'Evento no encontrado'], 404);
+        }
+
+        return response()->json($evento, 200);  // Retornar el evento encontrado
     }
 
     /**
@@ -92,14 +99,29 @@ class EventoController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Evento $evento)
-{
-    try {
-        $evento->usuarios()->detach(); // si hay relación con usuarios
-        $evento->delete();
+    {
+        try {
+            $evento->usuarios()->detach(); // si hay relación con usuarios
+            $evento->delete();
 
-        return response()->json(['mensaje' => 'Evento eliminado correctamente.'], 200);
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'Error al eliminar el evento: ' . $e->getMessage()], 500);
+            return response()->json(['mensaje' => 'Evento eliminado correctamente.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al eliminar el evento: ' . $e->getMessage()], 500);
+        }
     }
-}
+
+    public function apuntarse(Request $request, $eventoId)
+    {
+        $user = Auth::user(); // Asegurate de tener autenticación con Sanctum o similar
+        if (!$user) {
+            return response()->json(['error' => 'No autenticado'], 401);
+        }
+
+        $evento = Evento::findOrFail($eventoId);
+
+        // Insertar en tabla intermedia con attach
+        $user->eventos()->attach($evento->id, ['fecha' => now()]);
+
+        return response()->json(['message' => 'Te has apuntado correctamente.']);
+    }
 }

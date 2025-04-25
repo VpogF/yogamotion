@@ -16,9 +16,10 @@
     <div class="eventos-container">
         <!-- Lista de eventos -->
         <div v-if="eventosFiltrados.length > 0" class="eventos-list">
-            <div
+            <a
                 v-for="evento in eventosFiltrados"
                 :key="evento.id"
+                :href="'/yogamotion/public/detalle-evento?eventoId=' + evento.id"
                 class="evento-item"
             >
                 <img src="/public/img/claseyogaimg.webp" />
@@ -33,7 +34,7 @@
                     <strong>Tipo de practica:</strong>
                     {{ evento.tipo_practica.nom_practica }}
                 </p>
-            </div>
+            </a>
         </div>
 
         <!-- Mensaje cuando no hay eventos -->
@@ -139,5 +140,9 @@ export default {
 img {
     max-width: 270px;
     height: 180px;
+}
+
+a {
+    text-decoration: none;
 }
 </style>
