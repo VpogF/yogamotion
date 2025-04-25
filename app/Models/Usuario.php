@@ -32,6 +32,11 @@ class Usuario extends Authenticatable
         return $this->belongsTo(TipoUsuario::class, 'tipo_usuario_id');
     }
 
+    public function org_eventos()
+    {
+        return $this->hasMany(Evento::class, 'usuario_id');
+    }
+
     /**
      * The roles that belong to the Usuario
      *

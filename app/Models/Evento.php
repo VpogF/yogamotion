@@ -31,6 +31,11 @@ class Evento extends Model
         )->withPivot('fecha');
     }
 
+    public function organizador()
+    {
+        return $this->belongsTo(Usuario::class, 'usuario_id');
+    }
+
 
     /**
      * Get the tipoPractica that owns the Evento
