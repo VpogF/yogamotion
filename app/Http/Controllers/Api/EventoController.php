@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\UsuarioResource;
 use App\Models\Evento;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
@@ -24,51 +25,10 @@ class EventoController extends Controller
     }
     public function obtenerEventoUsuario($usuario_id)
     {
-        // Verifica que el usuario existe
-        $usuario = Usuario::find($usuario_id);
-        if (!$usuario) {
-            return response()->json(['error' => 'Usuario no encontrado'], 404);
-        }
 
-        // Obtener los eventos asociados con el usuario y cargar las relaciones 'estado' y 'usuarios'
-        $eventos = Evento::whereHas('usuarios', function (Builder $query) use ($usuario_id) {
-            $query->where('usuario_id', '=', $usuario_id);
-        })
-            ->with(['usuarios', 'estado'])  // Cargar relación con usuarios y estado
-            ->get();
-
-        // Verificar si se encontraron eventos
-        if ($eventos->isEmpty()) {
-            return response()->json(['message' => 'No se encontraron eventos para este usuario'], 200);
-        }
-
-        // Retornar los eventos
-        return EventoResource::collection($eventos);
+        $usuario = Usuario::with(['org_eventos.estado', 'org_eventos.tipoPractica', 'org_eventos.tipoEvento' ])->where('id', $usuario_id)->first();
+        return new UsuarioResource($usuario);
     }
-    // {
-    //     // Verifica que el usuario existe
-    //     $usuario = Usuario::find($usuario_id);
-    //     if (!$usuario) {
-    //         return response()->json(['error' => 'Usuario no encontrado'], 404);
-    //     }
-
-    //     // Obtener los eventos asociados con el usuario
-    //     $eventos = Evento::whereHas('usuarios', function (Builder $query) use ($usuario_id) {
-    //         $query->where('usuario_id', '=', $usuario_id);
-    //     })
-    //         ->with('usuarios')  // Cargar relación con usuarios
-    //         ->get();
-
-    //     // Verificar si se encontraron eventos
-    //     if ($eventos->isEmpty()) {
-    //         return response()->json(['message' => 'No se encontraron eventos para este usuario'], 200);
-    //     }
-
-    //     // Retornar los eventos
-    //     return EventoResource::collection($eventos);
-    // }
-
-
     public function get()
     {
 

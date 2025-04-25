@@ -83,7 +83,7 @@ img {
 
         <!-- Contenido del evento -->
         <div class="event-info">
-            <h4 class="activo">{{ evento.estado?.nombre || 'Estado desconocido' }}</h4>
+            <h4 class="activo">{{ capitalizar(evento.estado.estado) || 'Estado desconocido' }}</h4>
             <h3>{{ evento.nom_evento }}</h3>
             <p>{{ evento.descripcion }}</p>
             <p><strong>Fecha del Evento:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
@@ -103,6 +103,10 @@ defineProps({
         required: true
     }
 });
+function capitalizar(texto) {
+  if (!texto) return '';
+  return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+}
 </script>
 
 <style scoped>
@@ -193,5 +197,6 @@ img {
     color: #fff;
     align-items: center;
     border-radius: 5px;
+    text-align: center;
 }
 </style>

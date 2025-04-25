@@ -8,9 +8,9 @@
         </div>
         <!-- Mostrar eventos si existen, sino mostrar mensaje -->
         <div v-else>
-            <div v-if="eventos.length > 0" class="eventos-container">
+            <div v-if="usuario.org_eventos.length > 0" class="eventos-container">
                 <card
-                    v-for="evento in eventos"
+                    v-for="evento in usuario.org_eventos"
                     :key="evento.id"
                     :evento="evento"
                     @eliminar="eliminarEvento"
@@ -43,7 +43,8 @@ export default {
         return {
             // Estado que controla si se muestra o no el componente crea-evento
             showEvento: false,
-            eventos: [], // Guardar todos los eventos creados
+            // eventos: [], // Guardar todos los eventos creados
+            usuario:{},
             loading: true, // <--- nuevo estado
         };
     },
@@ -74,7 +75,7 @@ export default {
                 const response = await axios.get(
                     `http://localhost:8080/yogamotion/public/api/usuario/${me.usuarioId}/eventos`
                 );
-                me.eventos = response.data; // Guardamos los eventos en el array
+                me.usuario = response.data; // Guardamos los eventos en el array
                 console.log("Eventos cargados:", me.eventos);
             } catch (error) {
                 console.error("Error al obtener eventos:", error);
@@ -91,7 +92,7 @@ export default {
                 await axios.delete(
                     `http://localhost:8080/yogamotion/public/api/evento/${id}`
                 );
-                me.eventos = me.eventos.filter((evento) => evento.id !== id);
+                me.usuario.eventos = me.usuario.eventos.filter((evento) => evento.id !== id);
                 console.log("Evento eliminado correctamente");
             } catch (error) {
                 console.error("Error al eliminar el evento:", error);
