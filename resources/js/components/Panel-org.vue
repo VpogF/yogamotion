@@ -1,32 +1,32 @@
 <template lang="">
-    <div class="contenedor-card-eventos">
-        <h2>Tus eventos</h2>
-        <div v-if="loading" class="text-center mt-4 mb-5">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
-        </div>
-        <!-- Mostrar eventos si existen, sino mostrar mensaje -->
-        <div v-else>
-            <div
-                v-if="usuario.org_eventos.length > 0"
-                class="eventos-container"
-            >
-                <card
-                    v-for="evento in usuario.org_eventos"
-                    :key="evento.id"
-                    :evento="evento"
-                    @eliminar="eliminarEvento"
-                />
-            </div>
-
-            <p v-else>Todavía no has creado ningún evento</p>
-        </div>
+    <div>
         <a
-            :href="'/yogamotion/public/crear-evento?usuarioId=' + usuarioId"
-            class="standar-botton"
-            >Crea tu evento</a
-        >
+        :href="'/yogamotion/public/crear-evento?usuarioId=' + usuarioId"
+        class="boton-crear-evento"
+        title="Crear nuevo evento"
+    >
+    <i class="bi bi-plus"></i>
+    </a>
+    <h2>Tus eventos</h2>
+    </div>
+
+    <div v-if="loading" class="text-center mt-4 mb-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
+    <!-- Mostrar eventos si existen, sino mostrar mensaje -->
+    <div v-else>
+        <div v-if="usuario.org_eventos.length > 0" class="eventos-container">
+            <card
+                v-for="evento in usuario.org_eventos"
+                :key="evento.id"
+                :evento="evento"
+                @eliminar="eliminarEvento"
+            />
+        </div>
+
+        <p v-else>Todavía no has creado ningún evento</p>
     </div>
 </template>
 <script>
@@ -133,4 +133,5 @@ h2 {
     justify-content: center;
     gap: 35px;
 }
+
 </style>

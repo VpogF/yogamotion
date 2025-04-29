@@ -1,59 +1,58 @@
 <template>
-    <div class="detalle-container">
-
-        <div v-if="evento" class="card-detalle">
-            <div class="volver-btn" @click="volverAHome">×</div> <!-- Botón de cerrar -->
-            <img
-                class="detalle-img"
-                src="/public/img/claseyogaimg.webp"
-                alt="Imagen del evento"
-            />
-
-            <div class="detalle-info">
-                <h2>{{ evento.nom_evento }}</h2>
-                <p><strong>Descripción:</strong> {{ evento.descripcion }}</p>
-                <p><strong>Fecha:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
-                <p><strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
-                <p><strong>Duración:</strong> {{ evento.duracion }} horas</p>
-                <p><strong>Cupo:</strong> {{ evento.cupo }}</p>
-                <p><strong>Precio:</strong> {{ evento.precio }} €</p>
-
-                <button class="standar-botton" @click="apuntarse">
-                    Apuntarse
-                </button>
-            </div>
-        </div>
-
-        <p v-else>Cargando evento...</p>
+    <div v-if="evento" class="card-detalle-horizontal">
+    <div class="boton-cerrar-detalle" @click="volverAHome">
+        <i class="bi bi-x-lg"></i>
     </div>
+
+    <div class="imagen-contenedor">
+        <img
+            class="detalle-img"
+            src="/public/img/claseyogaimg.webp"
+            alt="Imagen del evento"
+        />
+    </div>
+
+    <div class="detalle-info">
+        <h2>{{ evento.nom_evento }}</h2>
+        <p><strong>Descripción:</strong> {{ evento.descripcion }}</p>
+        <p><strong>Fecha:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
+        <p><strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
+        <p><strong>Duración:</strong> {{ evento.duracion }} horas</p>
+        <p><strong>Cupo:</strong> {{ evento.cupo }}</p>
+        <p><strong>Precio:</strong> {{ evento.precio }} €</p>
+
+        <button class="standar-botton" @click="apuntarse">Apuntarse</button>
+    </div>
+</div>
+    <p v-else>Cargando evento...</p>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { ref, onMounted } from "vue";
+import axios from "axios";
 
 // Recibir props
 const props = defineProps({
     eventoId: {
         type: [Number, String],
         required: true,
-    }
-})
+    },
+});
 
-const evento = ref(null)
+const evento = ref(null);
 
 onMounted(async () => {
     try {
         const response = await axios.get(
             `http://localhost:8080/yogamotion/public/api/evento/${props.eventoId}`
-        )
-        console.log("Respuesta de la API:", response.data)
-        evento.value = response.data
+        );
+        console.log("Respuesta de la API:", response.data);
+        evento.value = response.data;
     } catch (error) {
-        console.error("Error al cargar el evento:", error)
-        alert("Hubo un error al cargar el evento.")
+        console.error("Error al cargar el evento:", error);
+        alert("Hubo un error al cargar el evento.");
     }
-})
+});
 
 async function apuntarse() {
     try {
@@ -67,73 +66,83 @@ async function apuntarse() {
     }
 }
 
-
 function volverAHome() {
     window.location.href = "/yogamotion/public/home";
 }
 </script>
 
 <style scoped>
-.detalle-container {
+.card-detalle-horizontal {
     display: flex;
-    justify-content: center;
-    padding: 4rem 2rem 2rem 2rem; /* Top padding más grande */
+    max-width: 900px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     position: relative;
+    margin: 2rem auto;
 }
 
-.card-detalle {
-    display: flex;
-    gap: 2rem;
-    max-width: 900px;
-    background-color: #f8f8f8;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.imagen-contenedor {
+    flex: 1;
+    min-width: 300px;
+    max-width: 320px;
+    overflow: hidden;
 }
 
 .detalle-img {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .detalle-info {
-    flex: 1;
+    flex: 2;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.btn-apuntarse {
-    margin-top: 1rem;
-    background-color: #28a745;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-.btn-apuntarse:hover {
-    background-color: #218838;
+.detalle-info h2 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.8rem;
 }
 
-.volver-btn {
+.detalle-info p {
+    margin-bottom: 0.5rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+.detalle-info strong {
+    color: #333;
+}
+
+.boton-cerrar-detalle {
     position: absolute;
     top: 20px;
-    right: 20px; /* Cambiado de left a right */
-    font-size: 2rem;
-    font-weight: bold;
-    cursor: pointer;
-    color: #555;
-    background: #eee;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: white;
+    color: #7FD297; /* púrpura */
+    border: 2px solid #7FD297;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    font-size: 28px;
+    font-weight: bold;
     text-align: center;
     line-height: 40px;
-    transition: background 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
 
-.volver-btn:hover {
-    background: #ccc;
+.boton-cerrar-detalle:hover {
+    color: white;
+    background-color: #7FD297;
 }
+
 </style>

@@ -1,69 +1,3 @@
-<!-- <template>
-    <div class="evento-item">
-        <div class="action-buttons">
-            <button class="btn btn-sm btn-primary" @click="$emit('editar', evento)">
-                <i class="bi bi-pencil-fill"></i>
-            </button>
-            <button class="btn btn-sm btn-danger" @click="$emit('eliminar', evento.id)">
-                <i class="bi bi-trash-fill"></i>
-            </button>
-        </div>
-        <img src="/public/img/claseyogaimg.webp" alt="Imagen del evento" />
-        <h3>{{ evento.nom_evento }}</h3>
-        <p>{{ evento.descripcion }}</p>
-        <p><strong>Fecha del Evento:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
-        <p><strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
-        <p><strong>Duración:</strong> {{ evento.duracion }} horas</p>
-        <p><strong>Cupo:</strong> {{ evento.cupo }}</p>
-        <p><strong>Coste:</strong> {{ evento.precio }} €</p>
-        <p>
-            <strong>Tipo de práctica:</strong>
-            {{ evento.tipo_practica?.nom_practica }}
-        </p>
-    </div>
-</template>
-
-
-<script setup>
-// Definir la prop `evento` que recibirá el componente
-defineProps({
-    evento: {
-        type: Object,
-        required: true
-    }
-});
-</script>
-
-<style scoped>
-.evento-item {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 5px;
-    border: 2px solid black;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin-bottom: 15px;
-    position: relative; /* Para posicionar los botones encima */
-}
-img {
-    max-width: 270px;
-    height: 180px;
-}
-.action-buttons {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 5px;
-    z-index: 10;
-}
-
-.action-buttons .btn {
-    padding: 4px 6px;
-    font-size: 0.8rem;
-    border-radius: 4px;
-}
-</style> -->
 <template>
     <div class="evento-item">
         <!-- Botones de acción -->
@@ -71,7 +5,10 @@ img {
             <button class="btn btn-edit" @click="$emit('editar', evento)">
                 <i class="bi bi-pencil-fill"></i>
             </button>
-            <button class="btn btn-delete" @click="$emit('eliminar', evento.id)">
+            <button
+                class="btn btn-delete"
+                @click="$emit('eliminar', evento.id)"
+            >
                 <i class="bi bi-trash-fill"></i>
             </button>
         </div>
@@ -83,15 +20,41 @@ img {
 
         <!-- Contenido del evento -->
         <div class="event-info">
-            <h4 :class="claseEstado(evento.estado.estado)">{{ capitalizar(evento.estado.estado) || 'Estado desconocido' }}</h4>
+            <h4 :class="claseEstado(evento.estado.estado)">
+                {{ capitalizar(evento.estado.estado) || "Estado desconocido" }}
+            </h4>
+
             <h3>{{ evento.nom_evento }}</h3>
-            <p>{{ evento.descripcion }}</p>
-            <p><strong>Fecha del Evento:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
-            <p><strong>Ubicación:</strong> {{ evento.ubicacion }}</p>
-            <p><strong>Duración:</strong> {{ evento.duracion }} horas</p>
-            <p><strong>Cupo:</strong> {{ evento.cupo }}</p>
-            <p><strong>Coste:</strong> {{ evento.precio }} €</p>
-            <p><strong>Tipo de práctica:</strong> {{ evento.tipo_practica?.nom_practica }}</p>
+            <p class="descripcion">{{ evento.descripcion }}</p>
+
+            <div class="event-grid">
+                <div class="info-item">
+                    <span class="label">📅 Fecha:</span>
+                    <span>{{
+                        new Date(evento.fecha_evento).toLocaleDateString()
+                    }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">📍 Ubicación:</span>
+                    <span>{{ evento.ubicacion }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">⏱️ Duración:</span>
+                    <span>{{ evento.duracion }} h</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">👥 Cupo:</span>
+                    <span>{{ evento.cupo }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">💰 Precio:</span>
+                    <span>{{ evento.precio }} €</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">🧘 Tipo:</span>
+                    <span>{{ evento.tipo_practica?.nom_practica }}</span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -100,20 +63,20 @@ img {
 defineProps({
     evento: {
         type: Object,
-        required: true
-    }
+        required: true,
+    },
 });
 function capitalizar(texto) {
-  if (!texto) return '';
-  return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+    if (!texto) return "";
+    return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
 }
 function claseEstado(estado) {
-  if (!estado) return '';
-  const estadoLower = estado.toLowerCase();
-  if (estadoLower === 'activo') return 'activo';
-  if (estadoLower === 'cancelado') return 'cancelado';
-  if (estadoLower === 'modificado') return 'modificado';
-  return '';
+    if (!estado) return "";
+    const estadoLower = estado.toLowerCase();
+    if (estadoLower === "activo") return "activo";
+    if (estadoLower === "cancelado") return "cancelado";
+    if (estadoLower === "modificado") return "modificado";
+    return "";
 }
 </script>
 
@@ -171,12 +134,12 @@ img {
 
 /* Botón azul sólido */
 .btn-edit {
-    background-color: #0d6efd;
+    background-color: #557db9;
 }
 
 /* Botón rojo sólido */
 .btn-delete {
-    background-color: #dc3545;
+    background-color: rgb(155, 70, 70);
 }
 
 .btn:hover {
@@ -196,11 +159,11 @@ img {
 }
 
 .event-info strong {
-    color: #48435C;
+    color: #48435c;
 }
 
-.activo{
-    background-color: green;
+.activo {
+    background-color: #7fd297;
     width: 100%;
     color: #fff;
     align-items: center;
@@ -208,8 +171,8 @@ img {
     text-align: center;
 }
 
-.cancelado{
-    background-color: red;
+.cancelado {
+    background-color: rgb(155, 70, 70);
     width: 100%;
     color: #fff;
     align-items: center;
@@ -217,12 +180,40 @@ img {
     text-align: center;
 }
 
-.modificado{
-    background-color: yellow;
+.modificado {
+    background-color: rgb(176, 176, 79);
     width: 100%;
     color: #fff;
     align-items: center;
     border-radius: 5px;
     text-align: center;
+}
+
+.descripcion {
+  margin: 8px 0 15px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Grid visual para los campos */
+.event-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  background: #f4f4f4;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.label {
+  font-weight: 600;
+  color: #48435C;
 }
 </style>
