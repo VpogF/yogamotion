@@ -8,7 +8,7 @@
         </div>
 
     @elseif (Auth::user()->tipo_usuario_id == 2)
-    <div class="home-container">
+    <div class="home-container" style="position: relative">
         <panel-org :usuario-id={{ Auth::user()->id }}></panel-org>
     </div>
     @endif

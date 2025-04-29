@@ -146,8 +146,10 @@ export default {
   transition: background 0.3s ease;
 }
 
-.dynamic-button:hover {
-  /* background-color: #218838; */
+.text-container {
+  min-height: 150px; /* Ajusta este valor según tu texto más largo */
+  display: flex;
+  align-items: center;
 }
 
 /* Ajustes en móviles */

@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 
 @section('contenido')
-<div class="d-flex align-items-center justify-content-center" style="width: 100%; height: 90%;">
+<div class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;">
     {{-- @include('partials.mensajes') --}}
     <div class="card align-items-center justify-content-center" style="width: 50%; padding: 25px;">
         <div class="fw-bold" style="font-size: 45px;">
