@@ -1,18 +1,14 @@
 <template>
     <div v-if="evento" class="card-detalle-horizontal">
-    <div class="boton-cerrar-detalle" @click="volverAHome">
+        <div class="boton-cerrar-detalle" @click="volverAHome">
         <i class="bi bi-x-lg"></i>
-    </div>
+        </div>
 
-    <div class="imagen-contenedor">
-        <img
-            class="detalle-img"
-            src="/public/img/claseyogaimg.webp"
-            alt="Imagen del evento"
-        />
-    </div>
+        <div class="imagen-contenedor">
+        <img class="detalle-img" src="/public/img/claseyogaimg.webp" alt="Imagen del evento" />
+        </div>
 
-    <div class="detalle-info">
+        <div class="detalle-info">
         <h2>{{ evento.nom_evento }}</h2>
         <p><strong>Descripción:</strong> {{ evento.descripcion }}</p>
         <p><strong>Fecha:</strong> {{ new Date(evento.fecha_evento).toLocaleDateString() }}</p>
@@ -21,54 +17,84 @@
         <p><strong>Cupo:</strong> {{ evento.cupo }}</p>
         <p><strong>Precio:</strong> {{ evento.precio }} €</p>
 
-        <button class="standar-botton" @click="apuntarse">Apuntarse</button>
+        <button
+            class="standar-botton"
+            @click="usuarioApuntado ? desapuntarse() : apuntarse()"
+        >
+            {{ usuarioApuntado ? 'Desapuntarse' : 'Apuntarse' }}
+        </button>
+        </div>
     </div>
-</div>
     <p v-else>Cargando evento...</p>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
+    import { ref, onMounted } from 'vue'
+    import axios from 'axios'
 
-// Recibir props
-const props = defineProps({
+    const props = defineProps({
     eventoId: {
         type: [Number, String],
         required: true,
     },
-});
+    usuarioId: {
+        type: [Number, String],
+        required: true,
+    },
+    })
 
-const evento = ref(null);
+    const evento = ref(null)
+    const usuarioApuntado = ref(false)
 
-onMounted(async () => {
+    onMounted(async () => {
     try {
+        // Obtener los datos del evento
         const response = await axios.get(
-            `http://localhost:8080/yogamotion/public/api/evento/${props.eventoId}`
-        );
-        console.log("Respuesta de la API:", response.data);
-        evento.value = response.data;
-    } catch (error) {
-        console.error("Error al cargar el evento:", error);
-        alert("Hubo un error al cargar el evento.");
-    }
-});
+        `http://localhost:8080/yogamotion/public/api/evento/${props.eventoId}`
+        )
+        evento.value = response.data
 
-async function apuntarse() {
+        // Verificar si el usuario ya está apuntado
+        const check = await axios.get(
+        `http://localhost:8080/yogamotion/public/api/usuario/${props.usuarioId}/miseventos`
+        )
+        usuarioApuntado.value = check.data.some(e => e.id == props.eventoId)
+    } catch (error) {
+        console.error('Error al cargar el evento o verificar inscripción:', error)
+    }
+    })
+
+    async function apuntarse() {
     try {
         const response = await axios.post(
-            `http://localhost:8080/yogamotion/public/api/evento/${props.eventoId}/apuntarse`
-        );
-        alert("¡Te has apuntado correctamente!");
+        `http://localhost:8080/yogamotion/public/api/evento/${props.eventoId}/apuntarse`,
+        { usuario_id: props.usuarioId }
+        )
+        usuarioApuntado.value = true
+        alert(response.data.message)
     } catch (error) {
-        console.error("Error al apuntarse:", error);
-        alert("Hubo un error al intentar apuntarte.");
+        console.error('Error al apuntarse:', error)
+        alert('Hubo un error al intentar apuntarte.')
     }
-}
+    }
 
-function volverAHome() {
-    window.location.href = "/yogamotion/public/home";
-}
+    async function desapuntarse() {
+    try {
+        const response = await axios.post(
+        `http://localhost:8080/yogamotion/public/api/evento/${props.eventoId}/desapuntarse`,
+        { usuario_id: props.usuarioId }
+        )
+        usuarioApuntado.value = false
+        alert(response.data.message)
+    } catch (error) {
+        console.error('Error al desapuntarse:', error)
+        alert('Hubo un error al intentar desapuntarte.')
+    }
+    }
+
+    function volverAHome() {
+    window.location.href = '/yogamotion/public/home'
+    }
 </script>
 
 <style scoped>
@@ -144,5 +170,4 @@ function volverAHome() {
     color: white;
     background-color: #7FD297;
 }
-
 </style>

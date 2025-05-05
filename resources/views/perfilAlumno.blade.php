@@ -2,6 +2,6 @@
 
 @section('contenido')
     <div class="home-container" style="position: relative">
-        <h2>HOLA</h2>
+        <perfil-alumno :usuario-id={{ Auth::user()->id }}></perfil-alumno>
     </div>
 @endsection
