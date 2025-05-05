@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand fw-semibold" style="font-size: 45px;" href="{{ url('/') }}">yogamotion</a>
+            <a class="navbar-brand fw-semibold logo-enlace" style="font-size: 45px; color: white" href="{{ url('/') }}">yogamotion</a>
             <div class="d-flex" role="search">
                 <ul class="navbar-nav" me-auto mb-2 mb.lg-0>
                     @if (Auth::check())
@@ -22,7 +22,7 @@
                             $usuario = Auth::user(); // Guardar el usuario autenticado en una variable
                         @endphp
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle logo-enlace" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false"> Hola,
                                 {{ ucfirst(Auth::user()->nom_user) }} !
                             </a>
@@ -71,6 +71,28 @@
     <div id="app" class="container-fluid">
         @yield('contenido')
     </div>
+    <footer class="footer bg-dark text-white mt-5 py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <h5 class="mb-1">yogamotion</h5>
+                <p class="mb-0">Conectando cuerpo y mente con movimiento.</p>
+            </div>
+            <div class="mb-3 mb-md-0">
+                <a href="#" class="text-white me-3 text-decoration-none">Inicio</a>
+                <a href="#" class="text-white me-3 text-decoration-none">Blog</a>
+                <a href="#" class="text-white text-decoration-none">Contacto</a>
+            </div>
+            <div>
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white"><i class="bi bi-envelope"></i></a>
+            </div>
+        </div>
+        <div class="text-center mt-3 small text-muted">
+            © {{ date('Y') }} yogamotion. Todos los derechos reservados.
+        </div>
+    </footer>
+
 
 </body>
 
