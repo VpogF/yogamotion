@@ -28,7 +28,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (Auth::user()->tipo_usuario_id == 3)
-                                <a class="dropdown-item" href="{{ url('/usuario/'.Auth::user()->id.'/miseventos')}}"><i class="bi bi-person"
+                                <a class="dropdown-item" href="{{ url('/perfilAlumno')}}"><i class="bi bi-person"
                                     aria-hidden="true"></i>
                                 Tu perfil
                             </a>

@@ -35,9 +35,7 @@ Route::get('/crear-evento', function () {
     return view('formCreaEvento');
 });
 
-Route::get('/miseventos', function () {
-    return view('perfilAlumno');
-});
+
 
 Route::get('/detalle-evento', function () {
     return view('detalleEvento');
@@ -49,6 +47,12 @@ Route::middleware(['auth'])->group(function (){
         $user = Auth::user();
 
         return view('home', compact('user'));
+    });
+
+    Route::get('/perfilAlumno', function () {
+        $user = Auth::user();
+
+        return view('perfilAlumno', compact('user'));
     });
 });
 
