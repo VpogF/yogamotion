@@ -231,4 +231,16 @@ export default {
   color: #555;
   font-style: italic;
 }
+
+@media (max-width: 600px) {
+  .buscador {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .buscador input,
+  .buscador button {
+    width: 100%;
+  }
+}
 </style>

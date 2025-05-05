@@ -35,6 +35,10 @@ Route::get('/crear-evento', function () {
     return view('formCreaEvento');
 });
 
+Route::get('/miseventos', function () {
+    return view('perfilAlumno');
+});
+
 Route::get('/detalle-evento', function () {
     return view('detalleEvento');
 });

@@ -29,6 +29,7 @@ Route::apiResource('usuario', UsuarioController::class);
 Route::apiResource('tipousuario', TipoUsuarioController::class);
 Route::apiResource('evento', EventoController::class);
 Route::get('/usuario/{usuario_id}/eventos', [EventoController::class, 'obtenerEventoUsuario']);
+Route::get('/usuario/{usuario_id}/miseventos', [EventoController::class, 'obtenerMisEventos'])-> name('perfil');
 Route::apiResource('tipoevento', TipoEventoController::class);
 Route::apiResource('estado', EstadoController::class);
 Route::apiResource('tipopractica', TipoPracticaController::class);

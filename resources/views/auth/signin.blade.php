@@ -1,11 +1,12 @@
 @extends('layouts.principal')
 
 @section('contenido')
-<div class="d-flex align-items-center justify-content-center" style="width: 100%; height: 100%;">
     {{-- @include('partials.mensajes') --}}
-    <div class="card align-items-center justify-content-center" style="width: 50%; padding: 25px;">
+    <div class="card align-items-center justify-content-center"
+        style="width: 50%; padding: 25px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;">
         <div class="fw-bold" style="font-size: 45px;">
-                Registro
+            Registro
         </div>
         <div class="card-body" style="width: 90%">
             <form action="{{ action([App\Http\Controllers\UsuarioController::class, 'store']) }}" method="POST">
@@ -14,7 +15,7 @@
                     <label for="nom_user" class="col-form-label">Nombre Usuario</label>
                     <div>
                         <input type="text" class="form-control" id="nom_user" name="nom_user" autofocus
-                        value="{{ old('nom_user') }}">
+                            value="{{ old('nom_user') }}">
                     </div>
                 </div>
 
@@ -22,7 +23,7 @@
                     <label for="correo" class="col-form-label">Correo</label>
                     <div>
                         <input type="email" class="form-control" id="correo" name="correo" autofocus
-                        value="{{ old('correo') }}">
+                            value="{{ old('correo') }}">
                     </div>
                 </div>
 
@@ -30,7 +31,7 @@
                     <label for="contrasenya" class="col-sm-2 col-form-label">Contraseña</label>
                     <div>
                         <input type="password" class="form-control" id="contrasenya" name="contrasenya"
-                        value="{{ old('contrasenya') }}">
+                            value="{{ old('contrasenya') }}">
                     </div>
                 </div>
 
@@ -74,11 +75,11 @@
                 <div class="row mb-3">
                     <div class="col-sm-12 d-flex justify-content-center">
                         <button type="submit" class="standar-botton float-right"><i class="fa fs-check"
-                            aria-hidden="true"></i>
+                                aria-hidden="true"></i>
                             Aceptar
                         </button>
                         <a href="{{ url('/') }}" class="btn btn-secondary float-right ms-1"><i class="fa fa-times"
-                            aria-hidden="true"></i>
+                                aria-hidden="true"></i>
                             Cancelar
                         </a>
                     </div>
@@ -89,25 +90,24 @@
         </div>
     </div>
 
-</div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const radios = document.querySelectorAll('input[name="btnradio"]');
-        const ubicacionDiv = document.getElementById('ubicacionDiv');
 
-        function toggleUbicacion() {
-            const selectedValue = document.querySelector('input[name="btnradio"]:checked').value;
-            ubicacionDiv.style.display = selectedValue === '3' ? 'block' : 'none';
-        }
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const radios = document.querySelectorAll('input[name="btnradio"]');
+            const ubicacionDiv = document.getElementById('ubicacionDiv');
 
-        radios.forEach(radio => {
-            radio.addEventListener("change", toggleUbicacion);
+            function toggleUbicacion() {
+                const selectedValue = document.querySelector('input[name="btnradio"]:checked').value;
+                ubicacionDiv.style.display = selectedValue === '3' ? 'block' : 'none';
+            }
+
+            radios.forEach(radio => {
+                radio.addEventListener("change", toggleUbicacion);
+            });
+
+            // Ejecutar al cargar la página (para mantener selección después de enviar el formulario)
+            toggleUbicacion();
         });
-
-        // Ejecutar al cargar la página (para mantener selección después de enviar el formulario)
-        toggleUbicacion();
-    });
-</script>
-
+    </script>
 @endsection

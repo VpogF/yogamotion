@@ -27,21 +27,25 @@
                                 {{ ucfirst(Auth::user()->nom_user) }} !
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @if (Auth::user()->tipo_usuario_id == 3)
+                                <a class="dropdown-item" href="{{ url('/usuario/'.Auth::user()->id.'/miseventos')}}"><i class="bi bi-person"
+                                    aria-hidden="true"></i>
+                                Tu perfil
+                            </a>
+                                @endif
                                 <a class="dropdown-item" href="{{ url('/logout') }}"><i class="bi bi-box-arrow-right"
                                         aria-hidden="true"></i>
-                                    Logout</a>
-                                <a class="dropdown-item" href="{{ url('/logout') }}"><i class="bi bi-pencil"
-                                        aria-hidden="true"></i>
-                                    Editar perfil
+                                    Logout
                                 </a>
 
                                 <form
+                                    class="dropdown-item
                                     action="{{ action([App\Http\Controllers\UsuarioController::class, 'destroy'], ['usuario' => $usuario->id]) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"><i class="bi bi-trash3 text-danger"></i>
-                                        Eliminar perfil
+                                    <button type="submit" style="all: unset;"><i class="bi bi-trash3 text-danger"></i>
+                                        Eliminar cuenta
                                     </button>
                                 </form>
                             </div>
