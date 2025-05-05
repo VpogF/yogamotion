@@ -112,16 +112,66 @@ class EventoController extends Controller
 
     public function apuntarse(Request $request, $eventoId)
     {
-        $user = Auth::user(); // Asegurate de tener autenticación con Sanctum o similar
-        if (!$user) {
-            return response()->json(['error' => 'No autenticado'], 401);
+        $usuarioId = $request->input('usuario_id');
+
+        if (!$usuarioId) {
+            return response()->json(['message' => 'Falta el ID del usuario'], 400);
         }
 
-        $evento = Evento::findOrFail($eventoId);
+        $evento = Evento::find($eventoId);
+        if (!$evento) {
+            return response()->json(['message' => 'Evento no encontrado'], 404);
+        }
 
-        // Insertar en tabla intermedia con attach
-        $user->eventos()->attach($evento->id, ['fecha' => now()]);
+        // Busca el usuario
+        $usuario = Usuario::find($usuarioId);
+        if (!$usuario) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
 
-        return response()->json(['message' => 'Te has apuntado correctamente.']);
+        // Verifica si ya está apuntado
+        if ($usuario->eventos()->where('evento_id', $eventoId)->exists()) {
+            return response()->json(['message' => 'Ya estás apuntado'], 400);
+        }
+
+        // Inserta en la tabla intermedia con la fecha actual
+        $usuario->eventos()->attach($eventoId, ['fecha' => now()]);
+
+        return response()->json(['message' => 'Apuntado correctamente']);
     }
+
+
+    public function desapuntarse($eventoId, Request $request)
+    {
+        $usuarioId = $request->usuario_id;
+
+        // Obtener al usuario
+        $usuario = Usuario::find($usuarioId);
+
+        // Verificar si el usuario existe
+        if (!$usuario) {
+            return response()->json(['message' => 'Usuario no encontrado.'], 404);
+        }
+
+        // Verificar si el usuario está apuntado a este evento
+        $evento = Evento::find($eventoId);
+
+        if (!$evento) {
+            return response()->json(['message' => 'Evento no encontrado.'], 404);
+        }
+
+        // Desapuntar al usuario del evento (usamos detach)
+        $usuario->eventos()->detach($eventoId);
+
+        return response()->json(['message' => 'Desapuntado del evento correctamente.']);
+    }
+
+
+
+    public function obtenerMisEventos($usuario_id)
+    {
+        $usuario = Usuario::with('eventos')->findOrFail($usuario_id);
+        return EventoResource::collection($usuario->eventos);
+    }
+
 }
