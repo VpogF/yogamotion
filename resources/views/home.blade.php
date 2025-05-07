@@ -3,7 +3,7 @@
 @section('contenido')
     @if (Auth::user()->tipo_usuario_id == 3)
         <div class="home-container">
-            <h3>Busca, reserva y disfruta de las mejores clases en un solo lugar.</h3>
+            <h3 class="home-title">Busca, reserva y disfruta de las mejores clases en un solo lugar.</h3>
             <card-evento></card-evento>
             <blog></blog>
         </div>

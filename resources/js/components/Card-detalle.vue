@@ -72,6 +72,7 @@
         )
         usuarioApuntado.value = true
         alert(response.data.message)
+
     } catch (error) {
         console.error('Error al apuntarse:', error)
         alert('Hubo un error al intentar apuntarte.')
