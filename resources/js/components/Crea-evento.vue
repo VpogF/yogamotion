@@ -127,6 +127,7 @@ const submitForm = async () => {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 80%;
+    margin: 50px;
 }
 
 /* Estilo para los inputs, selects y el botón */

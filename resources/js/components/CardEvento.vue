@@ -99,7 +99,7 @@ export default {
   display: flex;
   justify-content: center;
   margin: 20px 0;
-  width: 95%;
+  width: 100%;
 }
 
 .buscador {

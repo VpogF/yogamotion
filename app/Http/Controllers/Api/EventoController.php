@@ -123,6 +123,11 @@ class EventoController extends Controller
             return response()->json(['message' => 'Evento no encontrado'], 404);
         }
 
+        // Verifica si hay cupo disponible
+        if ($evento->cupo <= 0) {
+            return response()->json(['message' => 'No hay más cupo disponible'], 400);
+        }
+
         // Busca el usuario
         $usuario = Usuario::find($usuarioId);
         if (!$usuario) {
@@ -136,6 +141,10 @@ class EventoController extends Controller
 
         // Inserta en la tabla intermedia con la fecha actual
         $usuario->eventos()->attach($eventoId, ['fecha' => now()]);
+
+        // Disminuye el cupo
+        $evento->cupo -= 1;
+        $evento->save();
 
         return response()->json(['message' => 'Apuntado correctamente']);
     }
@@ -162,6 +171,10 @@ class EventoController extends Controller
 
         // Desapuntar al usuario del evento (usamos detach)
         $usuario->eventos()->detach($eventoId);
+
+        // Aumentar el cupo
+        $evento->cupo += 1;
+        $evento->save();
 
         return response()->json(['message' => 'Desapuntado del evento correctamente.']);
     }

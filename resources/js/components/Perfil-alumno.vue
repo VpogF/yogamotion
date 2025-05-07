@@ -101,7 +101,8 @@ export default {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 30px; /* <-- Añade este margen */
-  color: #5a5766;
+  color: #EDFFEC;
+  font-size: 2.5rem !important;
 }
 
 /* Contenedor de eventos */

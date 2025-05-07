@@ -1,6 +1,6 @@
 <template>
     <div class="blog-carousel-container">
-      <h3 class="titulo-blog">Blog de Deporte y Salud</h3>
+      <h3 class="titulo-blog">Blog</h3>
 
       <div class="carousel-wrapper">
         <button class="arrow left" @click="prevSlide">
@@ -105,13 +105,14 @@
     padding: 2rem;
     max-width: 1000px;
     margin: 0 auto;
+
   }
 
   .titulo-blog {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem !important;
     margin-bottom: 1.5rem;
-    color: #5a5766;
+    color: #EDFFEC !important;
   }
 
   .carousel-wrapper {
@@ -127,6 +128,9 @@
     overflow: hidden;
     width: 100%;
     justify-content: center;
+    background-color: #EDFFEC;
+    padding: 15px;
+    border-radius: 10px;
   }
 
   .blog-card {

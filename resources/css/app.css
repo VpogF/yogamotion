@@ -57,8 +57,17 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 90%;
     padding: 2rem;
+    justify-content: center;
+}
+
+.home-title {
+    color: #EDFFEC !important;
+    text-align: center;
+    font-size: 2.5rem !important;
+    margin: 65px 0px 40px 0px;
+    width: 64%;
 }
 
 .boton-crear-evento {
@@ -86,9 +95,9 @@ a {
 }
 
 h3 {
-    color: #5a5766 !important;
+    color: #5A5766 !important;
     text-align: center;
-    font-size: 2rem !important;
+    font-size: 1.5rem !important;
 }
 
 .footer {
