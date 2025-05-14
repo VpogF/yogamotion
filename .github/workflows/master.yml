@@ -1,8 +1,11 @@
 on:
-    push:
+    pull_request:
         branches:
          - main
-name: 🚀 Deploy website on push
+        types:
+         - closed  # Se ejecuta cuando el PR se cierra (permitiendo la fusión)
+
+name: 🚀 Deploy website on pull request
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -15,6 +18,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ftpupload.net
-        username: ${{ secrets.ftp_username }}
-        password: ${{ secrets.ftp_password }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
         server-dir: /yogamotion.vpf2024.me/htdocs/
