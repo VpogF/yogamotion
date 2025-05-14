@@ -22,4 +22,4 @@ jobs:
         server: ftp.byethost16.com
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: yogamotion.vpf2024.me/htdocs/
+        server-dir: /home/vol11_6/byethost16.com/b16_37391747/yogamotion.vpf2024.me/htdocs/
