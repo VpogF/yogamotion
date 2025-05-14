@@ -12,7 +12,7 @@
     "src": "public/img/claseyogaimg.webp"
   },
   "resources/css/app.css": {
-    "file": "assets/app-ce6faf4a.css",
+    "file": "assets/app-78553120.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -22,7 +22,7 @@
     "src": "resources/css/app.scss"
   },
   "resources/js/app.css": {
-    "file": "assets/app-7e7a0ea5.css",
+    "file": "assets/app-7f24a40f.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -32,9 +32,9 @@
       "assets/bootstrap-icons-bb1de989.woff"
     ],
     "css": [
-      "assets/app-7e7a0ea5.css"
+      "assets/app-7f24a40f.css"
     ],
-    "file": "assets/app-b64f93a8.js",
+    "file": "assets/app-39b8de49.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

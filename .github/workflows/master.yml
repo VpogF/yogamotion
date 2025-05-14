@@ -17,9 +17,10 @@ jobs:
         submodules: false
 
     - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      uses: SamKirkland/FTP-Deploy-Action@master
       with:
-        server: ftp.byethost16.com
+        server: ftpupload.net
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: yogamotion.vpf2024.me/htdocs/
+        local-dir: public/build
+        server-dir: /yogamotion.vpf2024.me/htdocs/public/build
