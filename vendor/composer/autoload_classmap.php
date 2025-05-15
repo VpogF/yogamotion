@@ -40,6 +40,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Resources\\EstadoResource' => $baseDir . '/app/Http/Resources/EstadoResource.php',
     'App\\Http\\Resources\\EventoResource' => $baseDir . '/app/Http/Resources/EventoResource.php',
+    'App\\Http\\Resources\\PepeResource' => $baseDir . '/app/Http/Resources/PepeResource.php',
     'App\\Http\\Resources\\TipoEventoResource' => $baseDir . '/app/Http/Resources/TipoEventoResource.php',
     'App\\Http\\Resources\\TipoPracticaResource' => $baseDir . '/app/Http/Resources/TipoPracticaResource.php',
     'App\\Http\\Resources\\TipoUsuarioResource' => $baseDir . '/app/Http/Resources/TipoUsuarioResource.php',

@@ -355,8 +355,8 @@ class ComposerStaticInitbfe12996eeecb6fdc8713a9fd9d431f8
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -564,6 +564,7 @@ class ComposerStaticInitbfe12996eeecb6fdc8713a9fd9d431f8
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Resources\\EstadoResource' => __DIR__ . '/../..' . '/app/Http/Resources/EstadoResource.php',
         'App\\Http\\Resources\\EventoResource' => __DIR__ . '/../..' . '/app/Http/Resources/EventoResource.php',
+        'App\\Http\\Resources\\PepeResource' => __DIR__ . '/../..' . '/app/Http/Resources/PepeResource.php',
         'App\\Http\\Resources\\TipoEventoResource' => __DIR__ . '/../..' . '/app/Http/Resources/TipoEventoResource.php',
         'App\\Http\\Resources\\TipoPracticaResource' => __DIR__ . '/../..' . '/app/Http/Resources/TipoPracticaResource.php',
         'App\\Http\\Resources\\TipoUsuarioResource' => __DIR__ . '/../..' . '/app/Http/Resources/TipoUsuarioResource.php',
