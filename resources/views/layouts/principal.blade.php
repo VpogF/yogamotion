@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand fw-semibold logo-enlace" style="font-size: 25px; color: white" href="{{ url('/') }}">yogamotion</a>
+            <a class="navbar-brand fw-semibold logo-enlace" style="font-size: 26px; color: white" href="{{ url('/') }}">yogamotion</a>
             <div class="d-flex" role="search">
                 <ul class="navbar-nav" me-auto mb-2 mb.lg-0>
                     @if (Auth::check())
