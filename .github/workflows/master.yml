@@ -24,3 +24,12 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: public/build/
         server-dir: /yogamotion.vpf2024.me/htdocs/public/
+
+    - name: 📂 Sync vendor folder
+      uses: SamKirkland/FTP-Deploy-Action@master
+      with:
+          server: ftpupload.net
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: vendor/
+          server-dir: /yogamotion.vpf2024.me/htdocs/vendor/
