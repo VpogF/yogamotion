@@ -1,0 +1,35 @@
+on:
+    pull_request:
+        branches:
+         - main
+        types:
+         - closed  # Se ejecuta cuando el PR se cierra (permitiendo la fusión)
+
+name: 🚀 Deploy website on pull request
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+      with:
+        submodules: false
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@master
+      with:
+        server: ftpupload.net
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: public/build/
+        server-dir: /yogamotion.vpf2024.me/htdocs/public/
+
+    - name: 📂 Sync vendor folder
+      uses: SamKirkland/FTP-Deploy-Action@master
+      with:
+          server: ftpupload.net
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: vendor/
+          server-dir: /yogamotion.vpf2024.me/htdocs/vendor/

@@ -1,0 +1,33 @@
+name: Build and Push Docker Image
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed  # Se ejecuta cuando el PR se cierra (permitiendo la fusión)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Comprobar el repositorio
+        uses: actions/checkout@v2  #clonar el repositorio en la máquina virtual
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v1  # Activa Buildx, herramienta avanzada de Docker para construir imágenes multiplataforma y con caché
+
+      - name: Iniciar sesión en Docker Hub
+        uses: docker/login-action@v2 # Se loguea en Docker Hub usando credenciales guardadas en los secretos del repositorio de GitHub
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Construir la imagen de Docker
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/yogamotion:latest .
+
+      - name: Subir la imagen a Docker Hub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/yogamotion:latest
